@@ -12,8 +12,8 @@ The user inputs the city, the dashboard gathers the current temperature, wind sp
 
 # Links
 
-[URL of GitHub Repository](https://github.com/ehliao/work-day-calendar)
+[URL of GitHub Repository](https://github.com/ehliao/weather-dashboard)
 
 
 
-[URL of deployed application](https://ehliao.github.io/work-day-calendar/)
+[URL of deployed application](https://ehliao.github.io/weather-dashboard/)
