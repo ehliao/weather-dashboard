@@ -3,9 +3,9 @@
     padding: 15px;
 }
 
-.search-btn {
-    margin: 10px;
-}
+/* .search-btn {
+    margin: 10px 70px;
+} */
 
 h1 {
     color: white;
@@ -14,13 +14,23 @@ h1 {
 
 .historyBtn {
     background-color: gray;
-    border: none;
     color: white;
     padding: 5px 50px;
     text-align: center;
-    text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 3px -25px;
+    margin: 3px -40px;
     cursor: pointer;
+    justify-content: center;
 }
+
+.forecast-body {
+    text-align: center;
+    display: inline-block;
+    margin: 15px;
+    padding: 0px;
+    border-style: 5px solid rgb(20, 38, 89);
+    background-color: rgb(20, 38, 89);
+    color: white;
+}
+

@@ -11,60 +11,62 @@ searchBtn.click(function() {
     var searchInput = $(".search-input").val();
     if (searchInput == "") {
     } else {
-        //create a functon call here for the ajax call
+        //creates <li> to <ul>, saves searched city to local storage and retreives from local storage
         getWeather(searchInput);      
 
         for (var i=0; i < localStorage.length; i++) {
             localStorage.setItem("search-history",searchInput);  
             var historyList = localStorage.getItem("search-history");
-            // var savedList = $("<li>");
-            // $(".history-list").append(savedList);
-            var btnList = $("<button>").addClass("historyBtn").text(historyList);
-            console.log(historyList)
+            var btnList = $("<button>").addClass("historyBtn col-12").text(historyList);
             $(".history-list").append(btnList);
         }
                 
     }
 })
-
+// provides current weather data for selected city
 function getWeather(urlParam){
     var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + urlParam + "&appid=" + APIkey + "&units=imperial";
     $.ajax({
         url:weatherURL,
         method:"GET"
     }).then(function (response) {
-        // console.log(response)
         var currentTemp = response.main.temp;
+        var tempIcon = $("<img>").attr("src","https://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
         var currentWind = response.wind.speed;
         var currentHumidity = response.main.humidity;
-        $("#current-temp").text(currentTemp + ' °F');
-        $("#current-humidity").text(currentHumidity + ' %');
+        $("#current-temp").text(currentTemp + ' °F ');
         $("#current-wind").text(currentWind + ' MPH');
-        $(".current-city").text(response.name + " " + currentDate);
-        
-        var uvURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + APIkey;
+        $("#current-humidity").text(currentHumidity + '%');
+        $(".current-city").text(response.name + " " + "(" + currentDate + ")").append(tempIcon);
+        // needed separate URL to obtain UV index
+        var forecastURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + response.coord.lat + "&lon=" + response.coord.lon + "&appid=" + APIkey + "&units=imperial";
         $.ajax({
-            url:uvURL,
+            url:forecastURL,
             method:"GET"
         }).then(function(response) {
-            console.log(response)
             var currentUV = response.current.uvi;
             $("#uv-index").text(currentUV);
-        })
+            // loop for 5 day forecast
+            for (var i = 1; i <= 5; i++) {
+                var date = new Date(response.daily[i].dt*1000)
+                var forecastDate = moment(date).format("l");
+                var forecastCard = $("<div>").addClass("forecast-body");
+                var forecastTitle = $("<h6>");
+                var forecastImg = $("<img>");
+                var forecastTemp = $("<p>").addClass("forecast-temp");
+                var forecastWind = $("<p>").addClass("forecast-wind");
+                var forecastHumidity = $("<p>").addClass("forecast-humidity");                
+               
+                $(".forecast").append(forecastCard);
+                forecastCard.append(forecastTitle).append(forecastDate);
+                forecastCard.append(forecastImg);
+                forecastCard.append(forecastTemp).append("Temp: " + response.daily[i].temp.day + " °F");
+                forecastCard.append(forecastWind).append("Wind: " + response.daily[i].wind_speed + " MPH");
+                forecastCard.append(forecastHumidity).append("Humidity: " + response.daily[i].humidity + "%");     
 
+                forecastImg.attr("src","https://openweathermap.org/img/wn/" + response.daily[i].weather[0].icon + "@2x.png");
+            }
+        })
     })
 }
-
-
-
-// WHEN I view current weather conditions for that city
-// THEN I am presented  an icon representation 
-
-
-// WHEN I view the UV index
-// THEN I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-
-
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 

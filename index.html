@@ -22,12 +22,12 @@
         </div>
 
         <!-- Search input -->
-        <div class="container row">
+        <div class="container row col-12">
             <div class=" col-12 col-md-3">
                 <h4>Search for a City: </h4>
                 <div class="input-group">
-                    <input type="text" class="search-input" placeholder="Enter City Name">
-                    <button type="submit" class="search-btn ">Search</button>
+                    <input type="text" class="search-input col-9" placeholder="Enter City Name">
+                    <button type="submit" class="search-btn">Search</button>
                 </div>
 
                 <!-- History list of previously searched cities -->
@@ -45,8 +45,8 @@
                             <h2 class="current-city">City Information <small class="text-muted" id="current-date"></small></h2>
                             <div>
                                 <p class="mb-0">Temperature: <span id="current-temp"></span></p>
+                                <p class="mb-0">Wind: <span id="current-wind"></span></p>
                                 <p class="mb-0">Humidity: <span id="current-humidity"></span></p>
-                                <p class="mb-0">Wind Speed: <span id="current-wind"></span></p>
                                 <p>UV index: <span id="uv-index"></span></p>
                             </div>
                         </div>
@@ -55,17 +55,11 @@
 
                     <!-- Five Day Forecast -->
                 <div class="row">
-                    <div class="col-12 text-center">
-                        <h3>5-Day Forecast</h3>
-                    </div>
-                    <div id="five-day-forecast" class="row">
-                        <div class="col-2">
-                            <div class="forecast">
-                                <div class="forecast-body">
-                                    <h6 class="forecast-title">Date</h6>
-                                    <i></i>
-                                    <p class="forecast-text">Temp: </p>
-                                    <p class="forecast-text">Humidity: </p>
+                    <div class="col-12">
+                        <h3>5-Day Forecast</h3>                    
+                        <div id="five-day-forecast" class="row">
+                            <div class="col-12">
+                                <div class="forecast col-12 col-md-6 col-lg mb-3">
                                 </div>
                             </div>
                         </div>
