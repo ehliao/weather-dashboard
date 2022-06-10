@@ -25,7 +25,7 @@ searchBtn.click(function() {
 })
 // provides current weather data for selected city
 function getWeather(urlParam){
-    var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + urlParam + "&appid=" + APIkey + "&units=imperial";
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + urlParam + "&appid=" + APIkey + "&units=imperial";
     $.ajax({
         url:weatherURL,
         method:"GET"
