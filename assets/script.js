@@ -6,21 +6,20 @@ var currentDate = moment().format('l');
 $("#current-date").text("(" + currentDate + ")");
 
 var searchBtn = $(".search-btn");
-
+$(".forecast").empty();
 searchBtn.click(function() {
     var searchInput = $(".search-input").val();
     if (searchInput == "") {
     } else {
+        console.log(searchInput)
         //creates <li> to <ul>, saves searched city to local storage and retreives from local storage
-        getWeather(searchInput);      
-
-        for (var i=0; i < localStorage.length; i++) {
-            localStorage.setItem("search-history",searchInput);  
+        getWeather(searchInput);
+        localStorage.setItem("search-history",searchInput);  
+        for (var i=0; i < localStorage.length; i++) {  
             var historyList = localStorage.getItem("search-history");
             var btnList = $("<button>").addClass("historyBtn col-12").text(historyList);
             $(".history-list").append(btnList);
         }
-                
     }
 })
 // provides current weather data for selected city
